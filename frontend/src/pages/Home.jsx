@@ -18,7 +18,7 @@ export default function Home() {
   const page = pageNum ? parseInt(pageNum) : (location.search ? parseInt(location.search.substring(location.search.lastIndexOf('=') + 1)) : 1);
   
   const contentPerPage = useMemo(() => {
-    const num = parseInt((window.innerWidth - 80 - 192)/(224) + 1) * 4;
+    const num = parseInt((window.innerWidth - 85 - 192)/(224) + 1) * 4;
     return num > 8 ? num : 8;
   }, []);
   
