@@ -27,7 +27,7 @@ app.get('/api/page/:pageNum', async (req, res) => {
         const pageCount = alldogsList.length % contentPerPage === 0 ? alldogsList.length / contentPerPage : Math.ceil(alldogsList.length / contentPerPage);
         res.send({pageCount, content: requiredDogsList});
     }catch(err){
-        console.log(err);
+        req.send(err);
     }
 })
 
