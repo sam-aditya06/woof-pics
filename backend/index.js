@@ -23,6 +23,7 @@ app.get('/api/page/:pageNum', async (req, res) => {
     const skip = (pageNum - 1) * contentPerPage;
     try{
         await client.connect();
+        const alldogsList = await client.db('woof-pics').collection('breeds').find().toArray();
         const requiredDogsList = await client.db('woof-pics').collection('breeds').find().skip(skip).limit(contentPerPage).sort({name: 1}).project({imageList: 0}).toArray();
         const pageCount = alldogsList.length % contentPerPage === 0 ? alldogsList.length / contentPerPage : Math.ceil(alldogsList.length / contentPerPage);
         res.send({pageCount, content: requiredDogsList});
