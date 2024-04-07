@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-export const ThemeContext = React.createContext({});
+export const ThemeContext = createContext({});
 
 export function ThemeContextProvider({ children }) {
-  const [theme, setTheme] = React.useState((
+  const [theme, setTheme] = useState((
     localStorage.theme === "dark" ||
     (!("theme" in localStorage) &&
       window.matchMedia("(prefers-color-scheme: dark)").matches)

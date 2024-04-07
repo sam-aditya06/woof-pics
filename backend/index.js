@@ -20,12 +20,10 @@ app.get('/', (req, res) => {
 app.get('/api/page/:pageNum', async (req, res) => {
     const pageNum = parseInt(req.params.pageNum);
     const contentPerPage = parseInt(req.query.contentPerPage);
-    const firstElementIndex = (pageNum - 1) * contentPerPage;
-    const lastElementIndex = firstElementIndex + contentPerPage - 1;
+    const skip = (pageNum - 1) * contentPerPage;
     try{
         await client.connect();
-        const alldogsList = await client.db('woof-pics').collection('breeds').find({}).sort({name: 1}).project({imageList: 0}).toArray();
-        const requiredDogsList = alldogsList.slice(firstElementIndex, lastElementIndex + 1);
+        const requiredDogsList = await client.db('woof-pics').collection('breeds').find().skip(skip).limit(contentPerPage).sort({name: 1}).project({imageList: 0}).toArray();
         const pageCount = alldogsList.length % contentPerPage === 0 ? alldogsList.length / contentPerPage : Math.ceil(alldogsList.length / contentPerPage);
         res.send({pageCount, content: requiredDogsList});
     }catch(err){
