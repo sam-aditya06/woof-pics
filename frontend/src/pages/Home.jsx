@@ -166,15 +166,17 @@ export default function Home() {
               );
             })}
             {page !== pageCount && (
-              <Link to={`/page/${page + 1}`}><IconButton
-                className="flex justify-center dark:text-white"
-                onClick={() => setCurrentPage((prev) => prev + 1)}
-              >
-                <ArrowForwardIosIcon
-                  className="dark:text-white"
-                  fontSize="small"
-                />
-              </IconButton></Link>
+              <Link to={location.search ? `/search?value=${value}&page=${page + 1}` : `/page/${page + 1}`}>
+                <IconButton
+                  className="flex justify-center dark:text-white"
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                >
+                  <ArrowForwardIosIcon
+                    className="dark:text-white"
+                    fontSize="small"
+                  />
+                </IconButton>
+              </Link>
             )}
           </div>
         )}
